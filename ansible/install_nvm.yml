@@ -1,9 +1,12 @@
 - name: Install nvm
   hosts: localhost
-  gather_facts: true  # Habilitamos la recopilación de hechos
+  gather_facts: true
   tasks:
     - name: Install nvm using shell command
       ansible.builtin.shell: >
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
       args:
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+    - name: Load nvm
+      ansible.builtin.shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh"
