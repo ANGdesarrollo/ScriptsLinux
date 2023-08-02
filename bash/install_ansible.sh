@@ -15,24 +15,19 @@ if [ $? -ne 0 ]; then
     python3 get-pip.py --user
 fi
 
-# Step 3: Add ~/.local/bin to PATH if not already present
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    echo "Adding ~/.local/bin to PATH..."
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-    source ~/.bashrc
-fi
-
-# Step 4: Install Ansible
+# Step 3: Install Ansible
 echo "Installing Ansible..."
 python3 -m pip install --user ansible
 
-# Step 5: Add ~/.local/bin to PATH (again) and re-source .bashrc
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    echo "Adding ~/.local/bin to PATH (again)..."
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+# Step 4: Upgrade Ansible
+echo "Upgrading Ansible..."
+python3 -m pip install --upgrade --user ansible
 
-# Step 6: Confirm installation
+# Step 4: Adding Path
+echo "Adding ~/.local/bin to PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Step 5: Confirm installation
 echo "Confirming Ansible installation..."
 ansible --version
 if [ $? -ne 0 ]; then
