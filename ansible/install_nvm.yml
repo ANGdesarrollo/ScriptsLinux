@@ -1,6 +1,5 @@
 - name: Install nvm
   hosts: localhost
-  gather_facts: true
   tasks:
     - name: Install nvm using shell command
       ansible.builtin.shell: >
@@ -9,4 +8,11 @@
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
     - name: Load nvm
-      ansible.builtin.command: ". {{ ansible_env.HOME }}/.nvm/nvm.sh"
+      ansible.builtin.shell: ". {{ ansible_env.HOME }}/.nvm/nvm.sh"
+      args:
+        executable: /bin/bash
+
+    - name: Change permissions of nvm.sh
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+        mode: "u+x"
