@@ -26,7 +26,13 @@ fi
 echo "Installing Ansible..."
 python3 -m pip install --user ansible
 
-# Step 5: Confirm installation
+# Step 5: Add ~/.local/bin to PATH (again) and re-source .bashrc
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    echo "Adding ~/.local/bin to PATH (again)..."
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Step 6: Confirm installation
 echo "Confirming Ansible installation..."
 ansible --version
 if [ $? -ne 0 ]; then
