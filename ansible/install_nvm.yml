@@ -1,6 +1,6 @@
 - name: Install nvm
   hosts: localhost
-  gather_facts: false
+  gather_facts: true  # Habilitamos la recopilación de hechos
   tasks:
     - name: Install nvm using shell command
       ansible.builtin.shell: >
