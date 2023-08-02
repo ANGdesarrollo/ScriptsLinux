@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 1: Check if curl is installed
-if ! dpkg -l curl &> /dev/null; then
+if ! command -v curl &> /dev/null; then
     echo "Curl is not installed. Installing curl..."
     sudo apt update
     sudo apt install -y curl
